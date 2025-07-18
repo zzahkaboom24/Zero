@@ -82,6 +82,9 @@ export const createAuth = () => {
         dubClient: dub,
       }),
       organization({
+        teams: {
+          enabled: true,
+        },
         allowUserToCreateOrganization: async () => {
           // const subscription = await getSubscription(user.id)
           // return subscription.plan === "pro"
