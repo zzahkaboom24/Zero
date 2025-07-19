@@ -23,7 +23,6 @@ WORKDIR /app
 
 RUN npm install -g pnpm
 RUN npm install -g pnpm drizzle-kit
-RUN pnpm update drizzle-orm
 
 # Copy workspace configuration and dependencies
 COPY --from=deps /app/node_modules ./node_modules
@@ -34,5 +33,7 @@ COPY --from=deps /app/pnpm-workspace.yaml ./pnpm-workspace.yaml
 # Copy server app with database configuration
 COPY apps/server/ ./apps/server/
 COPY packages/ ./packages/
+
+RUN pnpm update drizzle-orm
 
 WORKDIR /app/apps/server
