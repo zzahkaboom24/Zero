@@ -33,6 +33,7 @@ COPY --from=deps /app/pnpm-workspace.yaml ./pnpm-workspace.yaml
 # Copy server app with database configuration
 COPY apps/server/ ./apps/server/
 COPY packages/ ./packages/
+COPY patches/ ./patches/
 
 RUN pnpm update drizzle-orm
 
