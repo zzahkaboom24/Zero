@@ -22,19 +22,20 @@ FROM node:22-alpine AS runner
 WORKDIR /app
 
 RUN npm install -g pnpm
-RUN npm install -g pnpm drizzle-kit
+RUN npm install -g drizzle-kit
 
 # Copy workspace configuration and dependencies
 COPY --from=deps /app/node_modules ./node_modules
 COPY --from=deps /app/package.json ./package.json
 COPY --from=deps /app/pnpm-lock.yaml ./pnpm-lock.yaml
 COPY --from=deps /app/pnpm-workspace.yaml ./pnpm-workspace.yaml
+COPY --from=deps /app/turbo.json ./turbo.json
 
 # Copy server app with database configuration
 COPY apps/server/ ./apps/server/
 COPY packages/ ./packages/
 COPY patches/ ./patches/
 
-RUN pnpm update drizzle-orm
+# RUN pnpm update drizzle-orm
 
 WORKDIR /app/apps/server
