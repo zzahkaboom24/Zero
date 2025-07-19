@@ -22,6 +22,7 @@ FROM node:22-alpine AS runner
 WORKDIR /app
 
 RUN npm install -g pnpm
+RUN npm install -g pnpm drizzle-kit
 
 # Copy workspace configuration and dependencies
 COPY --from=deps /app/node_modules ./node_modules
